@@ -1,0 +1,16 @@
+selenium
+pytest
+webdriver-manager
+.\venv\Scripts\Activate.ps1 (perintah aktifkan venv)
+
+def fill_email(self, email):
+        email_field = self.driver.find_element(*self.EMAIL)
+        email_field.clear()
+        email_field.send_keys(email)
+
+    
+
+    def fill_required_fields_except_email(self):
+        self.fill_nama("Mahasiswa Polije")
+        self.fill_password("Password123!")
+        self.fill_konfirmasi_password("Password123!")
