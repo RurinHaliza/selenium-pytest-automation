@@ -101,7 +101,16 @@ class RegisterPage:
         self.fill_angkatan(data["angkatan"])
         self.fill_email(data["email"])
         self.fill_password(data["password"])
-        self.fill_confirm_password(data["password"])
+        
+        if "konfirmasi_password" in data:
+            self.fill_confirm_password(data["konfirmasi_password"])
+
+        pwd = self.driver.find_element(*self.PASSWORD).get_attribute("value")
+        cpwd = self.driver.find_element(*self.KONFIRMASI_PASSWORD).get_attribute("value")
+
+        print("PASSWORD FIELD :", repr(pwd))
+        print("CONFIRM FIELD  :", repr(cpwd))
+
 
 
     def submit(self):
@@ -151,6 +160,7 @@ class RegisterPage:
             "angkatan": self.ANGKATAN,
             "email": self.EMAIL,
             "password": self.PASSWORD,
+            "konfirmasi_password":self.KONFIRMASI_PASSWORD,
         }
 
         locator = fields.get(label_text)
@@ -159,13 +169,6 @@ class RegisterPage:
 
         element = self.driver.find_element(*locator)
         return element.get_attribute("required") is not None
-
-    def test_angkatan_terlalu_besar(self, register_page, valid_register_data):
-        valid_register_data["angkatan"] = "9999"
-        register_page.fill_form(valid_register_data)
-        register_page.submit()
-
-        assert register_page.has_html5_validation("angkatan")
 
     def get_value(self, field_name: str) -> str:
         field = self.get_field(field_name)
@@ -182,6 +185,7 @@ class RegisterPage:
             "Angkatan": self.ANGKATAN,
             "email": self.EMAIL,
             "password": self.PASSWORD,
+            "konfirmasi_password":self.KONFIRMASI_PASSWORD,
         }
 
         locator = fields.get(field_name)
