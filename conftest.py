@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.options import Options
 
 from pages.register_page import RegisterPage
 from utils.data_generator import generate_valid_register_data
+from pages.login_page import LoginPage
 
 
 # ===============================
@@ -78,3 +79,13 @@ def pytest_runtest_makereport(item, call):
 
             driver.save_screenshot(file_path)
             print(f"\n📸 Screenshot saved: {file_path}")
+
+
+# ===============================
+# FIXTURE LOGIN PAGE
+# ===============================
+@pytest.fixture
+def login_page(driver):
+    page = LoginPage(driver)
+    page.open()
+    return page
