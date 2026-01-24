@@ -21,10 +21,7 @@ class LoginPage:
         "//*[contains(text(),'These credentials do not match our records')]"
     )
 
-    GOOGLE_SSO_BUTTON = (
-        By.XPATH,
-        "//button[contains(.,'Masuk Dengan SSO Google')]"
-    )
+    SSO_GOOGLE_BUTTON = (By.XPATH, "//a[contains(@href,'/auth/google')]")
 
     # ===============================
     # INIT
@@ -123,3 +120,49 @@ class LoginPage:
             "return arguments[0].validationMessage;",
             email
         )
+
+    def submit(self):
+        self.click_login()
+
+    def has_html5_validation(self, field_name: str) -> bool:
+        field = self.get_field(field_name)
+        return field.get_attribute("validationMessage") != ""
+    
+    def get_field(self, field_name: str):
+        fields = {
+            "email": self.EMAIL,
+            "password": self.PASSWORD,
+        }
+
+        locator = fields.get(field_name)
+        if not locator:
+            raise ValueError(f"Field '{field_name}' tidak dikenali di LoginPage")
+
+        return self.driver.find_element(*locator)
+    
+    def click_remember_me(self):
+        checkbox = self.wait.until(
+            EC.element_to_be_clickable(self.REMEMBER_ME)
+        )
+        if not checkbox.is_selected():
+            checkbox.click()
+
+    def is_remember_me_checked(self) -> bool:
+        checkbox = self.driver.find_element(*self.REMEMBER_ME)
+        return checkbox.is_selected()
+
+    def click_sso_google(self):
+        self.wait.until(
+            EC.element_to_be_clickable(self.SSO_GOOGLE_BUTTON)
+        ).click()
+
+    def is_redirected_to_google(self) -> bool:
+        self.wait.until(
+            lambda d: "accounts.google.com" in d.current_url
+        )
+        return "accounts.google.com" in self.driver.current_url
+
+
+
+
+

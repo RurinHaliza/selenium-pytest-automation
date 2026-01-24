@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from pages.register_page import RegisterPage
 from utils.data_generator import generate_valid_register_data
 from pages.login_page import LoginPage
+from pages.dashboard_page import DashboardPage
 
 
 # ===============================
@@ -89,3 +90,52 @@ def login_page(driver):
     page = LoginPage(driver)
     page.open()
     return page
+
+# =========================
+# LOGIN FIXTURES FOR TEST DASHBOARD
+# =========================
+
+@pytest.fixture
+def login_as_user_belum_kuesioner(driver):
+    """
+    User valid, BELUM pernah mengisi kuesioner
+    Digunakan untuk:
+    - popup dashboard
+    - status KM / RM kosong
+    """
+
+    login_page = LoginPage(driver)
+    login_page.open()
+
+    login_page.fill_email("e41222052@student.polije.ac.id")
+    login_page.fill_password("e41222052@student.polije.ac.id")
+    login_page.submit()
+
+    dashboard = DashboardPage(driver)
+    dashboard.open()
+
+    return driver
+
+
+@pytest.fixture
+def login_as_user_sudah_kuesioner(driver):
+    """
+    User valid, SUDAH pernah mengisi kuesioner
+    Digunakan untuk:
+    - status KM / RM tersedia
+    - tidak ada popup
+    """
+
+    login_page = LoginPage(driver)
+    login_page.open()
+
+    # GANTI dengan akun yang SUDAH isi kuesioner
+    login_page.fill_email("tester@polije.ac.id")
+    login_page.fill_password("tester@polije.ac.id")
+    login_page.submit()
+
+    dashboard = DashboardPage(driver)
+    dashboard.open()
+
+    return driver
+
