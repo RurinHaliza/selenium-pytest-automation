@@ -129,7 +129,7 @@ def login_as_user_sudah_kuesioner(driver):
     login_page = LoginPage(driver)
     login_page.open()
 
-    # GANTI dengan akun yang SUDAH isi kuesioner
+    # Akun yang SUDAH isi kuesioner
     login_page.fill_email("tester@polije.ac.id")
     login_page.fill_password("tester@polije.ac.id")
     login_page.submit()
