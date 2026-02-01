@@ -7,7 +7,7 @@ class TestKuesionerMAI:
         page = KuesionerMAIPage(driver)
         page.open_from_sidebar()
         page.click_mulai_kuesioner()
-        page.answer_all_questions()
+        page.answer_all_questions_ls()
         page.submit()
 
         assert "kuesioner-mai" in driver.current_url
@@ -16,8 +16,12 @@ class TestKuesionerMAI:
         page = KuesionerMAIPage(driver)
         page.open_from_sidebar()
         page.click_mulai_kuesioner()
-        page.answer_all_questions()
+        page.answer_all_questions_ls()
         page.submit()
+
+        # jawab hanya 50 dari 52 
+        for i in range(2, 52):
+            page.answer_question_mai(i)
 
         page.submit()
 
@@ -28,10 +32,9 @@ class TestKuesionerMAI:
         page = KuesionerMAIPage(driver)
         page.open_from_sidebar()
         page.click_mulai_kuesioner()
-        page.answer_all_questions()
+        page.answer_all_questions_ls()
+        page.submit()
+        page.answer_all_questions_mai()
         page.submit()
 
-        page.answer_all_questions()
-        page.submit()
-
-        assert "history-kuesioner" in driver.current_url
+        assert "history_quis" in driver.current_url
