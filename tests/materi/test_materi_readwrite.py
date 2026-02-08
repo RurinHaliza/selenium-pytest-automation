@@ -39,6 +39,30 @@ class TestMateriReadWrite:
 
         # tetap di halaman yang sama (validasi HTML required)
         assert "readwrite" in driver.current_url
+    
+    def test_tugas_rangkuman_section_label_displayed(self, driver, login_as_user_sudah_kuesioner):
+        driver.get("https://hypermedialearning.sanggadewa.my.id/materi/readwrite/1")
+        page = MateriReadWritePage(driver)
+        page.page_loaded()
+
+        label = page.wait.until(
+            EC.visibility_of_element_located(page.TUGAS_RANGKUMAN_LABEL)
+        )
+
+        assert label.is_displayed()
+        assert "TUGAS RANGKUMAN" in label.text
+
+    def test_input_rangkuman_textarea_displayed(self, driver, login_as_user_sudah_kuesioner):
+        driver.get("https://hypermedialearning.sanggadewa.my.id/materi/readwrite/1")
+        page = MateriReadWritePage(driver)
+        page.page_loaded()
+
+        textarea = page.wait.until(
+            EC.visibility_of_element_located(page.RANGKUMAN_TEXTAREA)
+        )
+
+        assert textarea.is_displayed()
+        assert textarea.is_enabled()
 
     def test_submit_rangkuman_less_than_50_words_should_be_rejected(self, driver, login_as_user_sudah_kuesioner):
         driver.get("https://hypermedialearning.sanggadewa.my.id/materi/readwrite/1")
@@ -61,30 +85,6 @@ class TestMateriReadWrite:
         page.submit_rangkuman()
 
         assert page.error_message_displayed()
-
-    def test_input_rangkuman_textarea_displayed(self, driver, login_as_user_sudah_kuesioner):
-        driver.get("https://hypermedialearning.sanggadewa.my.id/materi/readwrite/1")
-        page = MateriReadWritePage(driver)
-        page.page_loaded()
-
-        textarea = page.wait.until(
-            EC.visibility_of_element_located(page.RANGKUMAN_TEXTAREA)
-        )
-
-        assert textarea.is_displayed()
-        assert textarea.is_enabled()
-
-    def test_tugas_rangkuman_section_label_displayed(self, driver, login_as_user_sudah_kuesioner):
-        driver.get("https://hypermedialearning.sanggadewa.my.id/materi/readwrite/1")
-        page = MateriReadWritePage(driver)
-        page.page_loaded()
-
-        label = page.wait.until(
-            EC.visibility_of_element_located(page.TUGAS_RANGKUMAN_LABEL)
-        )
-
-        assert label.is_displayed()
-        assert "Tugas Rangkuman" in label.text
 
     def test_cannot_leave_page_without_submit_rangkuman(self, driver, login_as_user_sudah_kuesioner):
         driver.get("https://hypermedialearning.sanggadewa.my.id/materi/readwrite/1")
