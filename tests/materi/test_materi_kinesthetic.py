@@ -100,6 +100,38 @@ class TestKinesthetic:
             "FAIL: Tombol Selanjutnya menyebabkan halaman 404"
         )
 
+    def test_navigation_without_submit_shows_validation(self,driver,login_as_user_belum_kuesioner):
+        driver.get("https://hypermedialearning.sanggadewa.my.id/materi/kinesthetic/1")
+        page = LiveCodingPage(driver)
+        """
+        User berpindah halaman sebelum submit kode
+        Expected: muncul notifikasi validasi
+        """
+
+        initial_url = page.get_current_url()
+        page.append_code("\nSystem.out.println('Belum submit');")
+        page.click_other_menu()
+
+        # ===== CASE 1: JS ALERT =====
+        alert_text = page.is_confirm_alert_present()
+        if alert_text:
+            assert (
+                "yakin" in alert_text.lower()
+                or "belum" in alert_text.lower()
+            ), "FAIL: Teks alert tidak sesuai validasi"
+            return
+
+        # ===== CASE 2: HTML MODAL =====
+        assert page.is_confirm_modal_visible(), (
+            "FAIL: Tidak ada alert atau modal validasi saat berpindah halaman"
+        )
+
+        # Pastikan belum pindah halaman
+        assert page.get_current_url() == initial_url, (
+            "FAIL: Sistem berpindah halaman tanpa konfirmasi"
+        )
+
+
 
 
 

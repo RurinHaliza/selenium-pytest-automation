@@ -3,6 +3,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoAlertPresentException
 
 
 class LiveCodingPage:
@@ -20,6 +21,9 @@ class LiveCodingPage:
     CLOSE_BUTTON = (By.XPATH, "//button[normalize-space()='Tutup']")
     PREVIOUS_BUTTON = (By.XPATH, "//a[contains(text(),'Sebelumnya')]")
     NEXT_BUTTON = (By.XPATH, "//a[contains(text(),'Selanjutnya')]")
+    OTHER_MENU = (By.XPATH, "//a[contains(@href,'/materi/visual/')]")
+    CONFIRM_MODAL = (By.CLASS_NAME, "modal")
+    CONFIRM_TEXT = (By.CLASS_NAME, "modal-body")
 
     def __init__(self, driver):
         self.driver = driver
@@ -106,5 +110,23 @@ class LiveCodingPage:
 
     def is_404_page(self):
         return self.ERROR_404_TEXT in self.driver.page_source
+    
+    def click_other_menu(self):
+        self.driver.find_element(*self.OTHER_MENU).click()
+
+    # ===== ALERT HANDLER =====
+    def is_confirm_alert_present(self):
+        try:
+            alert = self.driver.switch_to.alert
+            return alert.text
+        except NoAlertPresentException:
+            return None
+
+    # ===== MODAL HANDLER =====
+    def is_confirm_modal_visible(self):
+        try:
+            return self.driver.find_element(*self.CONFIRM_MODAL).is_displayed()
+        except:
+            return False
 
     
