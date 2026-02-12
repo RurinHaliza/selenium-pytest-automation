@@ -78,12 +78,6 @@ class TestRegisterEmail:
         register_page.submit()
         assert register_page.has_error("Email")
 
-    def test_email_mengandung_underscore(self, register_page, valid_register_data):
-        valid_register_data["email"] = "user_test@student.polije.ac.id"
-        register_page.fill_form(valid_register_data)
-        register_page.submit()
-        assert register_page.has_error("Email")
-
     def test_email_mengandung_dash(self, register_page, valid_register_data):
         valid_register_data["email"] = "user-test@student.polije.ac.id"
         register_page.fill_form(valid_register_data)
@@ -121,6 +115,12 @@ class TestRegisterEmail:
     # =========================
     # POSITIVE TEST CASES
     # =========================
+    
+    def test_email_mengandung_underscore(self, register_page, valid_register_data):
+        valid_register_data["email"] = "user_test@student.polije.ac.id"
+        register_page.fill_form(valid_register_data)
+        register_page.submit()
+        assert register_page.is_register_success()
 
     def test_email_valid_polije(self, register_page, valid_register_data):
         valid_register_data["email"] = "dosen@polije.ac.id"
