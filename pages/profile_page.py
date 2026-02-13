@@ -26,6 +26,16 @@ class ProfilePage:
     SAVE_BUTTON = (By.XPATH, "//button[contains(text(),'Simpan Perubahan')]")
     CANCEL_BUTTON = (By.XPATH, "//button[contains(text(),'Batal')]")
 
+    # --- Error Messages ---
+    ERROR_NAMA = (By.ID, "nama_lengkap-error")
+    ERROR_NIM = (By.ID, "nim-error")
+    ERROR_SEMESTER = (By.ID, "semester-error")
+    ERROR_ANGKATAN = (By.ID, "angkatan-error")
+
+    # --- Success Message ---
+    SUCCESS_ALERT = (By.CLASS_NAME, "alert-success")
+
+
     # ===============================
     # PROFILE DISPLAY METHODS
     # ===============================
@@ -123,6 +133,35 @@ class ProfilePage:
         self.driver.refresh()
 
     def wait_until_page_loaded(self):
+        self.wait.until(
+            EC.presence_of_element_located(self.EMAIL_FIELD)
+        )
+
+    # ===============================
+    # VALIDATION MESSAGE METHODS
+    # ===============================
+
+    def get_error_nama(self):
+        return self.wait.until(
+            EC.visibility_of_element_located(self.ERROR_NAMA)
+        ).text
+
+    def get_error_nim(self):
+        return self.wait.until(
+            EC.visibility_of_element_located(self.ERROR_NIM)
+        ).text
+
+    def get_error_semester(self):
+        return self.wait.until(
+            EC.visibility_of_element_located(self.ERROR_SEMESTER)
+        ).text
+
+    def get_error_angkatan(self):
+        return self.wait.until(
+            EC.visibility_of_element_located(self.ERROR_ANGKATAN)
+        ).text
+
+    def wait_until_reload_after_save(self):
         self.wait.until(
             EC.presence_of_element_located(self.EMAIL_FIELD)
         )
