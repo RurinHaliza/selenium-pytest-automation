@@ -63,6 +63,27 @@ class ProfilePage:
     def get_selected_angkatan(self):
         select = Select(self.driver.find_element(*self.ANGKATAN_DROPDOWN))
         return select.first_selected_option.text
+    
+    def get_all_semester_options(self):
+        """
+        Mengambil seluruh opsi semester dari dropdown
+        Return: list of string (contoh: ["1","2","3","4","5","6","7","8"])
+        """
+        select_element = Select(self.driver.find_element(*self.SEMESTER_DROPDOWN))
+        options = select_element.options
+        
+        return [option.text.strip() for option in options]
+    
+    def get_all_angkatan_options(self):
+        """
+        Mengambil seluruh opsi angkatan dari dropdown
+        Return: list of string (contoh: ["2020","2021","3","4","5","6","7","8"])
+        """
+        select_element = Select(self.driver.find_element(*self.ANGKATAN_DROPDOWN))
+        options = select_element.options
+        
+        return [option.text.strip() for option in options]
+
 
     # ===============================
     # EDIT METHODS
