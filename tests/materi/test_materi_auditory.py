@@ -30,3 +30,17 @@ class TestMateriAuditory:
         page.visual_page_loaded()
 
         assert "materi/visual" in driver.current_url
+
+    def test_navigation_requires_confirmation_from_auditory(
+        self, driver, login_as_user_sudah_kuesioner
+    ):
+        driver.get("https://hypermedialearning.sanggadewa.my.id/materi/auditory/1")
+
+        page = MateriPage(driver)
+
+        # User mencoba pindah sebelum selesai belajar
+        page.go_to_visual()
+
+        # Expected behavior (ideal requirement):
+        assert "materi/auditory" in driver.current_url, \
+            "User seharusnya tidak bisa meninggalkan halaman sebelum selesai belajar"

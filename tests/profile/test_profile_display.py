@@ -14,7 +14,7 @@ class TestProfileDisplay:
         email = page.get_email()
 
         assert email is not None
-        assert email != ""
+        #assert email != ""
         assert "@" in email
         assert email.endswith(".ac.id") 
         #or email.endswith(".com")

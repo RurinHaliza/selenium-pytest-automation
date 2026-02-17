@@ -2,12 +2,11 @@ import pytest
 from pages.logout_page import LogoutPage
 
 
-# ===============================
-# 1️⃣ Test: Modal Muncul
-# ===============================
-
 class TestLogout:
 
+    # ===============================
+    # 1️⃣ Test: Modal Muncul
+    # ===============================
     def test_logout_modal_muncul(self, driver, login_as_user_sudah_kuesioner):
         logout = LogoutPage(driver)
 

@@ -104,6 +104,11 @@ class LiveCodingPage:
         self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
         element.click()
 
+    def wait_popup_invisible(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.invisibility_of_element_located((By.ID, "resultModal"))
+        )
+
     # ===== INFO =====
     def get_current_url(self):
         return self.driver.current_url

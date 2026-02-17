@@ -47,6 +47,4 @@ class TestKuesionerLS:
         # user paksa pindah halaman
         page.force_navigate_to_dashboard()
 
-        # EXPECTED (KNOWN ISSUE):
-        # sistem langsung pindah tanpa validasi
-        assert "dashboard" in driver.current_url
+        assert "kuesioner" in driver.current_url

@@ -85,7 +85,7 @@ class DashboardPage:
         except:
             return False
 
-    def click_isi_kuesioner(self):
+    def click_isi_kuesioner_pop_up(self):
         self.wait.until(
             EC.element_to_be_clickable(self.BTN_ISI_KUESIONER_POPUP)
         ).click()

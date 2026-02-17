@@ -144,7 +144,12 @@ class ProfilePage:
         save_btn.click()
 
     def click_cancel(self):
-        self.driver.find_element(*self.CANCEL_BUTTON).click()
+        cancel_btn = WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(self.CANCEL_BUTTON)
+        )
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", cancel_btn)
+        cancel_btn.click()
+
 
     # ===============================
     # UTILITIES

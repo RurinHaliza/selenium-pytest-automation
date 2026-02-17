@@ -1,3 +1,4 @@
+import pytest
 from pages.materi_page import MateriPage
 
 
@@ -28,3 +29,13 @@ class TestMateriVisual:
         page.auditory_page_loaded()
 
         assert "materi/auditory" in driver.current_url
+
+    #@pytest.mark.xfail(reason="Belum ada validasi sebelum meninggalkan halaman materi")
+    def test_navigation_requires_confirmation(self, driver, login_as_user_sudah_kuesioner):
+        driver.get("https://hypermedialearning.sanggadewa.my.id/materi/visual/1")
+
+        page = MateriPage(driver)
+        page.go_to_auditory()
+
+        # Expected behavior (yang benar secara requirement)
+        assert "materi/visual" in driver.current_url
