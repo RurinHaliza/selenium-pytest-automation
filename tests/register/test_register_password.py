@@ -96,7 +96,7 @@ class TestRegisterPassword:
             "12345678",    # angka semua
             "abcdefgh",    # huruf kecil semua
             "ABCDEFGH",    # huruf besar semua
-            "@@@@@@@@",    # simbol semua
+            "&&&&&&&&",    # simbol semua
         ]
     )
     def test_password_komposisi_tidak_valid(
@@ -146,18 +146,19 @@ class TestRegisterPassword:
 
         assert register_page.is_register_success()
 
-    # =========================
-    # POSITIVE TEST CASE
-    # =========================
-
-    def test_password_valid(self, register_page, valid_register_data):
+    def test_password_valid_kriteria(self, register_page, valid_register_data):
         """
-        Password valid (huruf besar, kecil, angka, simbol)
+        Boundary value: tepat 8 karakter
         """
-        valid_register_data["password"] = "Abcdef1@"
-        valid_register_data["konfirmasi_password"] = "Abcdef1@"
+        valid_register_data["password"] = "#Qwerty123"
+        valid_register_data["konfirmasi_password"] = "#Qwerty123"
 
         register_page.fill_form(valid_register_data)
         register_page.submit()
 
         assert register_page.is_register_success()
+    # =========================
+    # POSITIVE TEST CASE
+    # =========================
+
+    

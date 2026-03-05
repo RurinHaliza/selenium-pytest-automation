@@ -88,7 +88,7 @@ class TestRegisterNamaLengkap:
         assert register_page.is_register_success()
 
     def test_nama_valid_minimal_karakter(self, register_page, valid_register_data):
-        valid_register_data["nama_lengkap"] = "Gilang B"
+        valid_register_data["nama_lengkap"] = "Rurin Nur"
         register_page.fill_form(valid_register_data)
         register_page.submit()
         assert register_page.is_register_success()

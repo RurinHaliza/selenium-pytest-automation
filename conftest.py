@@ -25,7 +25,6 @@ def driver():
     yield driver
     driver.quit()
 
-
 # ===============================
 # FIXTURE REGISTER PAGE
 # ===============================
@@ -34,7 +33,6 @@ def register_page(driver):
     page = RegisterPage(driver)
     page.open()
     return page
-
 
 # ===============================
 # DATA REGISTER VALID (FINAL)
@@ -53,7 +51,6 @@ def valid_register_data():
     data.setdefault("konfirmasi_password", data["password"])
 
     return data
-
 
 # ===============================
 # SCREENSHOT SAAT FAIL
@@ -81,7 +78,6 @@ def pytest_runtest_makereport(item, call):
             driver.save_screenshot(file_path)
             print(f"\n📸 Screenshot saved: {file_path}")
 
-
 # ===============================
 # FIXTURE LOGIN PAGE
 # ===============================
@@ -92,7 +88,7 @@ def login_page(driver):
     return page
 
 # =========================
-# LOGIN FIXTURES FOR TEST DASHBOARD
+# LOGIN FIXTURES FOR TEST
 # =========================
 
 @pytest.fixture
@@ -116,7 +112,6 @@ def login_as_user_belum_kuesioner(driver):
 
     return driver
 
-
 @pytest.fixture
 def login_as_user_sudah_kuesioner(driver):
     """
@@ -139,7 +134,6 @@ def login_as_user_sudah_kuesioner(driver):
 
     return driver
 
-
 @pytest.fixture
 def login_as_user_belum_kuesioner2(driver):
     """
@@ -161,3 +155,27 @@ def login_as_user_belum_kuesioner2(driver):
     dashboard.open()
 
     return driver
+
+#Account For Regression
+@pytest.fixture
+def login_as_user_belum_kuesionerNew(driver):
+    """
+    User valid, SUDAH pernah mengisi kuesioner
+    Digunakan untuk:
+    - status KM / RM tersedia
+    - tidak ada popup
+    """
+
+    login_page = LoginPage(driver)
+    login_page.open()
+
+    # Akun yang SUDAH isi kuesioner
+    login_page.fill_email("tester2@polije.ac.id")
+    login_page.fill_password("tester2@polije.ac.id")
+    login_page.submit()
+
+    dashboard = DashboardPage(driver)
+    dashboard.open()
+
+    return driver
+

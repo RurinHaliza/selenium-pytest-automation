@@ -4,7 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class LoginPage:
-    URL = "https://hypermedialearning.sanggadewa.my.id/login"
+    #URL = "https://hypermedialearning.sanggadewa.my.id/login"
+    URL = "https://hypermedialearning.project2025.id/public/login"
     DASHBOARD_URL_PART = "/dashboard"
 
     # ===============================

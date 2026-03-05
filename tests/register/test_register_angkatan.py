@@ -33,7 +33,7 @@ class TestRegisterAngkatan:
         assert value == ""
 
     def test_angkatan_simbol(self, register_page, valid_register_data):
-        valid_register_data["angkatan"] = "@@@@"
+        valid_register_data["angkatan"] = "&&&&"
         register_page.fill_form(valid_register_data)
         value = register_page.get_value("angkatan")
         assert value == ""
@@ -56,7 +56,7 @@ class TestRegisterAngkatan:
     # =========================
 
     def test_angkatan_valid_minimum(self, register_page, valid_register_data):
-        valid_register_data["angkatan"] = "2021"
+        valid_register_data["angkatan"] = "2022"
         register_page.fill_form(valid_register_data)
         register_page.submit()
         assert register_page.is_register_success()

@@ -33,7 +33,7 @@ class TestRegisterSemester:
         assert register_page.has_error("semester")
 
     def test_semester_simbol(self, register_page, valid_register_data):
-        valid_register_data["semester"] = "@@"
+        valid_register_data["semester"] = "&&"
         register_page.fill_form(valid_register_data)
         register_page.submit()
         assert register_page.has_error("semester")

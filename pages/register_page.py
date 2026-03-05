@@ -4,8 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class RegisterPage:
-    URL = "https://hypermedialearning.sanggadewa.my.id/register"
-
+    #URL = "https://hypermedialearning.sanggadewa.my.id/register"
+    URL = "https://hypermedialearning.project2025.id/public/register"
     # ===============================
     # LOCATORS
     # ===============================

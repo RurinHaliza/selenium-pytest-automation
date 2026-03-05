@@ -53,6 +53,20 @@ class LiveCodingPage:
         actions.send_keys(code)
         actions.perform()
 
+    def append_code2(self, code):
+
+        current_code = self.driver.execute_script("""
+            return monaco.editor.getModels()[0].getValue();
+        """)
+
+        updated_code = current_code
+        updated_code = updated_code.replace("...............", " Mahasiswa")
+        updated_code = updated_code.replace(".........", ".println")
+
+        self.driver.execute_script("""
+            monaco.editor.getModels()[0].setValue(arguments[0]);
+        """, updated_code)
+
     def submit_code(self):
         btn = WebDriverWait(self.driver, 15).until(
             EC.element_to_be_clickable(self.SUBMIT_BUTTON)

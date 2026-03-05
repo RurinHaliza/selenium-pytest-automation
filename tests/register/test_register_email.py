@@ -49,7 +49,7 @@ class TestRegisterEmail:
         assert register_page.has_error("Email")
 
     def test_email_simbol_semua(self, register_page, valid_register_data):
-        valid_register_data["email"] = "@@@@@"
+        valid_register_data["email"] = "&&&&"
         register_page.fill_form(valid_register_data)
         register_page.submit()
         assert register_page.has_html5_validation("email")
@@ -66,8 +66,14 @@ class TestRegisterEmail:
         register_page.submit()
         assert register_page.has_error("Email")
 
-    def test_email_domain_typo(self, register_page, valid_register_data):
+    def test_email_domain_salah(self, register_page, valid_register_data):
         valid_register_data["email"] = "user@student.polije.co.id"
+        register_page.fill_form(valid_register_data)
+        register_page.submit()
+        assert register_page.has_error("Email")
+
+    def test_email_terdaftar_typo(self, register_page, valid_register_data):
+        valid_register_data["email"] = "e41222052@polije.acid"
         register_page.fill_form(valid_register_data)
         register_page.submit()
         assert register_page.has_error("Email")
@@ -89,6 +95,7 @@ class TestRegisterEmail:
         register_page.fill_form(valid_register_data)
         register_page.submit()
         assert register_page.has_error("Email")
+
 
     def test_register_dua_kali_email_sama(self, register_page, valid_register_data):
         email = valid_register_data["email"]
