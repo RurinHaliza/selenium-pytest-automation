@@ -136,7 +136,7 @@ class TestRegisterEmail:
         assert register_page.is_register_success()
 
     def test_email_valid_student_polije(self, register_page, valid_register_data):
-        valid_register_data["email"] = "mahasiswa@student.polije.ac.id"
+        valid_register_data["email"] = "E41222050@student.polije.ac.id"
         register_page.fill_form(valid_register_data)
         register_page.submit()
         assert register_page.is_register_success()

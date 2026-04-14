@@ -36,7 +36,8 @@ class TestDashboardStatusKMRM:
         assert dashboard.is_learning_style_not_filled()
         print("LEARNING STYLE =", dashboard.get_learning_style_text())
 
-    def test_learning_style_sudah_diisi(self, driver, login_as_user_sudah_kuesioner):
+    def test_learning_style_sudah_diisi(self, 
+        driver, login_as_user_sudah_kuesioner3):
         dashboard = DashboardPage(driver)
         dashboard.open()
         assert dashboard.is_learning_style_filled()

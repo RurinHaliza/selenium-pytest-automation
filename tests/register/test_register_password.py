@@ -123,12 +123,8 @@ class TestRegisterPassword:
         assert register_page.is_register_success()
 
     def test_password_tepat_minimum(self, register_page, valid_register_data):
-        """
-        Boundary value: tepat 8 karakter
-        """
         valid_register_data["password"] = "Abcd1@xy"
         valid_register_data["konfirmasi_password"] = "Abcd1@xy"
-
         register_page.fill_form(valid_register_data)
         register_page.submit()
 

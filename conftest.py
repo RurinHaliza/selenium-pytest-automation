@@ -179,3 +179,46 @@ def login_as_user_belum_kuesionerNew(driver):
 
     return driver
 
+@pytest.fixture
+def login_as_user_belum_kuesionerNew2(driver):
+    """
+    User valid, SUDAH pernah mengisi kuesioner
+    Digunakan untuk:
+    - status KM / RM tersedia
+    - tidak ada popup
+    """
+
+    login_page = LoginPage(driver)
+    login_page.open()
+
+    # Akun yang SUDAH isi kuesioner
+    login_page.fill_email("iniemail@polije.ac.id")
+    login_page.fill_password("inipassword")
+    login_page.submit()
+
+    dashboard = DashboardPage(driver)
+    dashboard.open()
+
+    return driver
+
+@pytest.fixture
+def login_as_user_sudah_kuesioner3(driver):
+    """
+    User valid, SUDAH pernah mengisi kuesioner
+    Digunakan untuk:
+    - status KM / RM tersedia
+    - tidak ada popup
+    """
+
+    login_page = LoginPage(driver)
+    login_page.open()
+
+    # Akun yang SUDAH isi kuesioner
+    login_page.fill_email("sudah@polije.ac.id")
+    login_page.fill_password("sudah@polije.ac.id")
+    login_page.submit()
+
+    dashboard = DashboardPage(driver)
+    dashboard.open()
+
+    return driver

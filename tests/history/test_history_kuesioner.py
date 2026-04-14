@@ -28,7 +28,6 @@ class TestHistoryKuesioner:
         """
         page = HistoryKuesionerPage(driver)
         page.open()
-
         scores = page.get_scores()
 
         expected_labels = {"Visual", "Auditory", "Read/Write", "Kinesthetic"}

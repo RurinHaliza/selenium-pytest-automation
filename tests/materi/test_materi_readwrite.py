@@ -22,7 +22,6 @@ class TestMateriReadWrite:
             "yang digunakan untuk membungkus data dan method dalam satu kelas. "
             "Tujuannya adalah melindungi data agar tidak diakses langsung dari luar."
         )
-
         page.input_rangkuman(rangkuman_valid)
         page.submit_rangkuman()
 

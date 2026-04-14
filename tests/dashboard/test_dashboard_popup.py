@@ -11,7 +11,8 @@ class TestDashboardPopup:
 
         assert dashboard.is_popup_visible()
 
-    def test_button_isi_kuesioner_redirect(self, driver, login_as_user_belum_kuesioner2):
+    def test_button_isi_kuesioner_redirect(self,
+        driver, login_as_user_belum_kuesionerNew2):
         dashboard = DashboardPage(driver)
         dashboard.open()
 

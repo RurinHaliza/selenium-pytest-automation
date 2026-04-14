@@ -5,7 +5,7 @@ import re
 
 
 class DashboardPage:
-    URL = "https://hypermedialearning.sanggadewa.my.id/dashboard"
+    URL = "https://hypermedialearning.project2025.id/public/dashboard"
 
     # ===== POPUP (MODAL) =====
     POPUP_MODAL = (By.ID, "kuesionerModal")

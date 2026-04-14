@@ -82,7 +82,7 @@ class TestRegisterNIM:
     # =========================
 
     def test_nim_valid_9_karakter(self, register_page, valid_register_data):
-        valid_register_data["nim"] = "E41222789"
+        valid_register_data["nim"] = "E41222050"
         register_page.fill_form(valid_register_data)
         register_page.submit()
 

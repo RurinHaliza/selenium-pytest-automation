@@ -4,7 +4,8 @@ from pages.kuesioner_panduan_page import KuesionerPanduanPage
 
 class TestKuesionerPanduan:
 
-    def test_open_panduan_from_sidebar(self, driver, login_as_user_sudah_kuesioner):
+    def test_open_panduan_from_sidebar(self, 
+        driver, login_as_user_sudah_kuesioner):
         panduan = KuesionerPanduanPage(driver)
         panduan.open_from_sidebar()
 
